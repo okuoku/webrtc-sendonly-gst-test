@@ -20,7 +20,8 @@
 #define STUN_SERVER "stun.l.google.com:19302"
 
 #ifdef G_OS_WIN32
-#define VIDEO_SRC "mfvideosrc"
+//#define VIDEO_SRC "mfvideosrc"
+#define VIDEO_SRC "videotestsrc"
 #else
 #define VIDEO_SRC "v4l2src"
 #endif
@@ -243,7 +244,7 @@ create_receiver_entry (SoupWebsocketConnection * connection)
       "rtph264pay config-interval=-1 name=payloader aggregate-mode=zero-latency ! "
       "application/x-rtp,media=video,encoding-name=H264,payload="
       RTP_PAYLOAD_TYPE " ! webrtcbin. "
-      "autoaudiosrc is-live=1 ! queue max-size-buffers=1 leaky=downstream ! audioconvert ! audioresample ! opusenc ! rtpopuspay pt="
+      "audiotestsrc ! queue max-size-buffers=1 leaky=downstream ! audioconvert ! audioresample ! opusenc ! rtpopuspay pt="
       RTP_AUDIO_PAYLOAD_TYPE " ! webrtcbin. ", &error);
   if (error != NULL) {
     g_error ("Could not create WebRTC pipeline: %s\n", error->message);
