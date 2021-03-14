@@ -264,8 +264,10 @@ create_receiver_entry (SoupWebsocketConnection * connection)
     GstWebRTCPriorityType priority;
 
     priority = _priority_from_string (video_priority);
+#if 0
     if (priority)
       gst_webrtc_rtp_sender_set_priority (trans->sender, priority);
+#endif
   }
   trans = g_array_index (transceivers, GstWebRTCRTPTransceiver *, 1);
   trans->direction = GST_WEBRTC_RTP_TRANSCEIVER_DIRECTION_SENDONLY;
@@ -273,8 +275,10 @@ create_receiver_entry (SoupWebsocketConnection * connection)
     GstWebRTCPriorityType priority;
 
     priority = _priority_from_string (audio_priority);
+#if 0
     if (priority)
       gst_webrtc_rtp_sender_set_priority (trans->sender, priority);
+#endif
   }
   g_array_unref (transceivers);
 
